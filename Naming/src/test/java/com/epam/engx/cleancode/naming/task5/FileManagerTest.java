@@ -47,7 +47,7 @@ public class FileManagerTest {
     @Test
     public void should_retrieveFile_when_validDocument() {
         File document = fileManager.retrieveFile("sample.doc");
-        Assert.assertTrue(false);
+        Assert.assertTrue(document.exists());
     }
 
     @Test(expected = InvalidFileTypeException.class)
