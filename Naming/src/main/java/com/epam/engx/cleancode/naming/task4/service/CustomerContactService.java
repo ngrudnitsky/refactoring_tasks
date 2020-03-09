@@ -5,8 +5,8 @@ import com.epam.engx.cleancode.naming.task4.thirdpartyjar.CustomerContact;
 
 public interface CustomerContactService {
 
-    CustomerContact findCustomerContactDetailsByCustomerId(Long customerId);
+    CustomerContact getCustomerContactById(Long id);
 
-    void updateCustomerContactDetails(CustomerContact customerContactDetails);
+    void updateCustomerContact(CustomerContact customerContact);
 
 }

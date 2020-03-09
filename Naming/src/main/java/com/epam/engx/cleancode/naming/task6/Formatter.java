@@ -13,17 +13,18 @@ public class Formatter {
     }
 
     private static String formatKyeValue(String key, String value) {
-        String content = key + UNDERSCORE + value;
-        String minuses = repeat(MINUS, content.length());
-        return PLUS +  minuses + PLUS + "\n"
-                + PIPE + content + PIPE + "\n" +
-                PLUS + minuses + PLUS + "\n";
+        String content = PIPE + key + UNDERSCORE + value + PIPE + "\n";
+        String frame = getFrame(content.length()).toString();
+        return frame.concat(content).concat(frame);
     }
 
-    private static String repeat(String symbol, int times) {
-        String result = "";
-        for (int i = 0; i < times; i++)
-            result += symbol;
+    private static StringBuilder getFrame(int repetitionsNumber) {
+        StringBuilder result = new StringBuilder();
+        result.append(PLUS);
+        for (int i = 3; i < repetitionsNumber; i++){
+            result.append(MINUS);
+        }
+        result.append(PLUS).append("\n");
         return result;
     }
 }
