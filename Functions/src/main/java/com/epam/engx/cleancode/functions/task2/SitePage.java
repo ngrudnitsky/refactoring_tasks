@@ -5,40 +5,24 @@ import java.util.Map;
 
 
 public class SitePage {
-
-    private static final String HTTP = "http://";
-    private static final String EDITABLE = "/?edit=true";
-    private static final String DOMAIN = "mysite.com";
-
-
-    private String siteGroup;
-    private String userGroup;
+    private static final String PAGE_URL_BEGINNING = "http://mysite.com/?edit=true";
+    private final String pageUrlAttributes;
 
     public SitePage(String siteGroup, String userGroup) {
-        this.siteGroup = siteGroup;
-        this.userGroup = userGroup;
+        pageUrlAttributes = "&siteGrp=" + siteGroup + "&userGrp=" + userGroup;
     }
 
     public String getEditablePageUrl(Map<String, String> params) {
-        String paramsString = "";
-        for (Map.Entry<String, String> param : params.entrySet())
-            paramsString += "&" + param.getKey() + "=" + param.getValue();
-        return HTTP + DOMAIN + EDITABLE + paramsString + getAttributes();
+        return PAGE_URL_BEGINNING + getUrlParameters(params) + pageUrlAttributes;
     }
 
-    private String getAttributes() {
-        return "&siteGrp=" + getSiteGroup() + "&userGrp=" + getUserGroup();
+    private String getUrlParameters(Map<String, String> params) {
+        StringBuilder urlParameters = new StringBuilder();
+
+        for (Map.Entry<String, String> param : params.entrySet()) {
+            urlParameters.append("&").append(param.getKey())
+                    .append("=").append(param.getValue());
+        }
+        return urlParameters.toString();
     }
-
-    public String getUserGroup() {
-        return userGroup;
-    }
-
-    public String getSiteGroup() {
-        return siteGroup;
-    }
-
-
-
-
 }

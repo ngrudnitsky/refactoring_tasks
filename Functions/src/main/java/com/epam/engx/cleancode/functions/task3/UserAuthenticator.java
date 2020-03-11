@@ -8,17 +8,19 @@ public abstract class UserAuthenticator implements UserService {
 
     private SessionManager sessionManager;
 
-    public User login(String userName, String password) {
+    public User login(String userName, String password) throws LoginException {
         return loginUser(getUserByName(userName), password);
     }
 
-    private User loginUser(User user, String password) {
+    private User loginUser(User user, String password) throws LoginException {
         if (isPasswordCorrect(user, password)) {
             sessionManager.setCurrentUser(user);
             return user;
         }
-        return null;
+        throw new LoginException(String.format("Incorrect password %s.", password));
     }
 
-
+    public UserAuthenticator(SessionManager sessionManager) {
+        this.sessionManager = sessionManager;
+    }
 }
